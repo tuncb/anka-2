@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="mlir_tablegen">
+      <UniqueIdentifier>{d2293feb-a096-4295-9575-687b917faf4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anka2.cpp">
@@ -24,5 +27,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json" />
+    <None Include="mlir_tablegen\anka_ops.td">
+      <Filter>mlir_tablegen</Filter>
+    </None>
+    <None Include="mlir_tablegen\Dialect.cpp.inc">
+      <Filter>mlir_tablegen</Filter>
+    </None>
+    <None Include="mlir_tablegen\Dialect.h.inc">
+      <Filter>mlir_tablegen</Filter>
+    </None>
+    <None Include="mlir_tablegen\Ops.cpp.inc">
+      <Filter>mlir_tablegen</Filter>
+    </None>
+    <None Include="mlir_tablegen\Ops.h.inc">
+      <Filter>mlir_tablegen</Filter>
+    </None>
   </ItemGroup>
 </Project>

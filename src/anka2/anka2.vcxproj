@@ -121,6 +121,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LLVMInstall)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-op-decls &gt; $(SolutionDir)\mlir_tablegen\Ops.h.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-op-defs &gt; $(SolutionDir)\mlir_tablegen\Ops.cpp.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-dialect-decls &gt; $(SolutionDir)\mlir_tablegen\Dialect.h.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-dialect-defs &gt; $(SolutionDir)\mlir_tablegen\Dialect.cpp.inc</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -140,12 +146,23 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LLVMInstall)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-op-decls &gt; $(SolutionDir)\mlir_tablegen\Ops.h.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-op-defs &gt; $(SolutionDir)\mlir_tablegen\Ops.cpp.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-dialect-decls &gt; $(SolutionDir)\mlir_tablegen\Dialect.h.inc
+$(LLVMInstall)\bin\mlir-tblgen.exe -I $(LLVMInstall)\include $(SolutionDir)\mlir_tablegen\anka_ops.td -gen-dialect-defs &gt; $(SolutionDir)\mlir_tablegen\Dialect.cpp.inc</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="anka2.cpp" />
     <ClCompile Include="lib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="mlir_tablegen\anka_ops.td" />
+    <None Include="mlir_tablegen\Dialect.cpp.inc" />
+    <None Include="mlir_tablegen\Dialect.h.inc" />
+    <None Include="mlir_tablegen\Ops.cpp.inc" />
+    <None Include="mlir_tablegen\Ops.h.inc" />
     <None Include="vcpkg.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
