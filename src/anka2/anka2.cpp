@@ -1,13 +1,23 @@
-#pragma warning(disable : 4146) // unary minus operator applied to unsigned type, result still unsigned
+#pragma warning(disable : 4146 4996) // unary minus operator applied to unsigned type, result still unsigned
 #include <mlir/IR/MLIRContext.h>
-#pragma warning(default : 4146)
 
+#include "mlir/Dialect/Affine/Passes.h"
 #include "mlir/Dialect/Func/Extensions/AllExtensions.h"
+#include "mlir/Dialect/LLVMIR/Transforms/Passes.h"
+#include "mlir/ExecutionEngine/ExecutionEngine.h"
+#include "mlir/ExecutionEngine/OptUtils.h"
 #include "mlir/IR/BuiltinOps.h"
 #include "mlir/IR/DialectRegistry.h"
 #include "mlir/IR/OwningOpRef.h"
+#include "mlir/Target/LLVMIR/Dialect/Builtin/BuiltinToLLVMIRTranslation.h"
+#include "mlir/Target/LLVMIR/Dialect/LLVMIR/LLVMToLLVMIRTranslation.h"
 
+#include "llvm/Support/TargetSelect.h"
 #include <fmt/printf.h>
+
+#pragma warning(default : 4146 4996)
+
+#include "Dialect.h"
 
 int runJit(mlir::ModuleOp module)
 {
@@ -19,6 +29,8 @@ int runJit(mlir::ModuleOp module)
   // can JIT-compile.
   mlir::registerBuiltinDialectTranslation(*module->getContext());
   mlir::registerLLVMDialectTranslation(*module->getContext());
+
+  const auto enableOpt = false;
 
   // An optimization pipeline to use within the execution engine.
   auto optPipeline = mlir::makeOptimizingTransformer(
@@ -53,14 +65,12 @@ int main()
 {
   fmt::print("Hello world from anka 2");
 
-  mlir::MLIRContext context;
-
   mlir::DialectRegistry registry;
   mlir::func::registerAllExtensions(registry);
   mlir::MLIRContext context(registry);
 
   // Load our Dialect in this MLIR Context.
-  context.getOrLoadDialect<mlir::toy::ToyDialect>();
+  context.getOrLoadDialect<mlir::anka::AnkaDialect>();
 
   mlir::OwningOpRef<mlir::ModuleOp> module;
   if (int error = loadMLIR(context, module))
