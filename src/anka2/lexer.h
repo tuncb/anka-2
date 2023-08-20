@@ -13,15 +13,18 @@ enum class LexType
   UserDefinedString,
   DoubleColon,
   Equal,
-  IntegerNumber
+  IntegerNumber,
+  SemiColon,
+  EndOfFile,
 };
 
 struct LexAtom
 {
   LexType type;
-  int relativePosition;
+  int relative_position;
 };
 
 [[nodiscard]] auto lex(std::string_view text) -> std::optional<std::vector<LexAtom>>;
+[[nodiscard]] auto print_atoms(const std::vector<LexAtom>& atoms);
 
 } // namespace anka
