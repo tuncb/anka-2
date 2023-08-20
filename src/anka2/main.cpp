@@ -7,6 +7,11 @@
 #include "argument_parser.h"
 #include "log.h"
 
+auto execute(const std::string &input_filename) -> bool
+{
+  return false;
+}
+
 int main(int argc, char *argv[])
 {
   auto arguments_opt = anka::parse(argc, argv);
@@ -18,11 +23,16 @@ int main(int argc, char *argv[])
 
   LOG_F(INFO, "Anka 2 is starting...");
 
-  // execute here.
-
-  if (arguments.output_comparison_file.has_value())
+  if (arguments.filename.has_value())
   {
-    return anka::compare_output(arguments.output_comparison_file.value()) ? 0 : -1;
+    auto has_executed = execute(arguments.filename.value());
+
+    if (arguments.output_comparison_file.has_value())
+    {
+      return anka::compare_output(arguments.output_comparison_file.value()) ? 0 : -1;
+    }
+
+    return has_executed;
   }
 
   return 0;
