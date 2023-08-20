@@ -4,19 +4,30 @@ add_executable(anka
   main.cpp
   lexer.h lexer.cpp
   argument_parser.h argument_parser.cpp
+  log.h log.cpp
 )
 
+# Dependencies
 include(FetchContent)
 
+# Argumentum
 set (ARGUMENTUM_BUILD_STATIC_LIBS ON)
-
 FetchContent_Declare(Argumentum
    GIT_REPOSITORY https://github.com/mmahnic/argumentum.git
    GIT_TAG v0.3.2
 )
 FetchContent_MakeAvailable(Argumentum)
 
+# Loguru
+FetchContent_Declare(LoguruGitRepo
+   GIT_REPOSITORY https://github.com/emilk/loguru
+   GIT_TAG master # TODO change with git hash later
+)
+FetchContent_MakeAvailable(LoguruGitRepo)
+
+# Library links
 target_link_libraries( anka
    PRIVATE
    Argumentum::argumentum
-   )
+   loguru::loguru
+)
