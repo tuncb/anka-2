@@ -13,7 +13,7 @@
 #include "mlir/Target/LLVMIR/Dialect/LLVMIR/LLVMToLLVMIRTranslation.h"
 
 #include "llvm/Support/TargetSelect.h"
-#include <fmt/printf.h>
+//#include <fmt/printf.h>
 
 #pragma warning(default : 4146 4996)
 
@@ -63,7 +63,8 @@ int loadMLIR(mlir::MLIRContext &context, mlir::OwningOpRef<mlir::ModuleOp> &modu
 
 int main()
 {
-  fmt::print("Hello world from anka 2");
+  //fmt::print("Hello world from anka 2");
+
 
   mlir::DialectRegistry registry;
   mlir::func::registerAllExtensions(registry);
