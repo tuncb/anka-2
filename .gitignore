@@ -2,5 +2,6 @@ target
 x64
 .vs
 vcpkg_installed
+build
 
 *.user

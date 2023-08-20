@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.1...3.23)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+
+project(
+  AnkaLang
+  VERSION 0.0.1
+  LANGUAGES CXX)
+
+message(STATUS "[user] Adding sub-directory for anka executable...")
+add_subdirectory(src/anka2)
+
+# example usage
+# md build
+# cmake ..
