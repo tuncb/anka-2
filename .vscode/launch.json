@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/anka2/target/debug/anka2.exe",
       "args": [
         "--filename",
-        "${workspaceFolder}/tests/test2.anka"
+        "${workspaceFolder}/tests/test.anka"
       ],
       "cwd": "${workspaceFolder}"
     }

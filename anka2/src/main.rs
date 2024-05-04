@@ -2,6 +2,8 @@ use std::fs;
 
 use clap::Parser;
 
+mod lexer;
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -21,5 +23,11 @@ fn main() {
             std::process::exit(1);
         }
     };
+
     println!("{}", contents);
+
+    let tokens = lexer::lex(&contents);
+    for token in tokens {
+        println!("{}: {}", token.token_type.to_string(), token.value);
+    }
 }
