@@ -1,6 +1,6 @@
 use strum_macros::Display;
 
-#[derive(Display)]
+#[derive(Display, Debug)]
 pub enum TokenType {
     Word,
     TupleStart,

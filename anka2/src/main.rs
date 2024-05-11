@@ -2,7 +2,12 @@ use std::fs;
 
 use clap::Parser;
 
+mod engine;
+mod instructions;
 mod lexer;
+mod stack;
+
+use crate::engine::run;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -24,10 +29,26 @@ fn main() {
         }
     };
 
-    println!("{}", contents);
+    println!("code: {}", contents);
 
     let tokens = lexer::lex(&contents);
-    for token in tokens {
+    println!("---tokens---");
+    for token in &tokens {
         println!("{}: {}", token.token_type.to_string(), token.value);
     }
+
+    let tape = instructions::fill_tape(&tokens);
+    println!("---tape---");
+    for item in &tape.items {
+        match item {
+            instructions::TapeItemType::Instruction(instruction) => {
+                println!("{}", instruction.to_string());
+            }
+            instructions::TapeItemType::IntegerConstant(value) => {
+                println!("{}", value);
+            }
+        }
+    }
+
+    run(&tape);
 }

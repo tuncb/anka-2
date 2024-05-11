@@ -1,1 +1,1 @@
-delete create_vec [int 10]
+deallocate allocate 10
